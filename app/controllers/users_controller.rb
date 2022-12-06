@@ -14,4 +14,20 @@ class UsersController < ApplicationController
       render(template: "users_html/show")
     end
   end
+
+  def create
+    my_input_username = params.fetch("input_username")
+    new_user = User.new
+    new_user.username = my_input_username
+    new_user.save
+    redirect_to("/users/" + my_input_username)
+  end
+
+  def update
+    my_input_username = params.fetch("input_username")
+    the_user = User.where(username: @the_user.username).first
+    the_user.username = my_input_username
+    the_user.save
+    redirect_to("/users/" + my_input_username)
+  end
 end
