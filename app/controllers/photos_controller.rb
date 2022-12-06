@@ -5,13 +5,13 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @username = params.fetch("username")
-    @the_user = User.where(username: @username).first
+    @my_photo_id = params.fetch("photo_id")
+    @the_photo = Photo.where(id: @my_photo_id).first
 
-    if @the_user == nil
+    if @the_photo == nil
       redirect_to("/404")
     else
-      render(template: "users_html/show")
+      render(template: "photos_html/show")
     end
   end
 end

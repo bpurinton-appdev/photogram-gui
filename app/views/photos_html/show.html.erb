@@ -1,69 +1,88 @@
-<h1><%= @the_user.username %></h1>
+<h1>Photo Details</h1>
 
 <dl>
   <dt>
-    ID
+    Image
   </dt>
   <dd>
-    <%= @the_user.id %>
+    <img src="<%= @the_photo.image %>">
   </dd>
 
   <dt>
-    Edit username
+    Caption
+  </dt>
+  <dd>
+    <p>
+      <%= @the_photo.caption %>
+    </p>
+  </dd>
+
+  <dt>
+    Owner
+  </dt>
+  <dd>
+    <%= @the_photo.poster.username %>
+  </dd>
+
+  <dt>
+    Posted
+  </dt>
+  <dd>
+    <%= @the_photo.created_at %>
+  </dd>
+
+  <dt>
+    Edit photo
   </dt>
   <dd>
     Form goes here
   </dd>
+
+  <dt>
+    Delete photo
+  </dt>
+  <dd>
+    <a href="">Link goes here</a>
+  </dd>
 </dl>
 
-<h2>Own photos (<%= @the_user.own_photos.count %>)</h2>
+<h2>Comments</h2>
 
-<table border="1">
+<table>
   <tr>
     <th>
-      Image
+      Commenter
     </th>
 
     <th>
-      Owner
-    </th>
-
-    <th>
-      Caption
+      Comment
     </th>
 
     <th>
       Posted
     </th>
-
-    <th>
-    </th>
   </tr>
 
-  <% @the_user.own_photos.each do |a_photo| %>
+  <% @the_photo.comments.each do |a_comment| %>
 
     <tr>
       <td>
-        <img src=<%= a_photo.image %>>
+        <%= a_comment.commenter.username %>
       </td>
 
       <td>
-        <%= a_photo.poster.username %>
+        <%= a_comment.body %>
       </td>
 
       <td>
-        <%= a_photo.caption %>
-      </td>
-
-      <td>
-        <%= a_photo.created_at %>
-      </td>
-
-      <td>
-        <a href="/photos/<%= a_photo.id %>">
-          Show details
-        </a>
+        <%= a_comment.created_at %>
       </td>
     </tr>
   <% end %>
 </table>
+
+<h3>Add a new comment</h3>
+
+<div>
+  Form goes here
+</div>
