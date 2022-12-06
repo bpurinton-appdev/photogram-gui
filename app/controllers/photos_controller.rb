@@ -22,4 +22,28 @@ class PhotosController < ApplicationController
     # render(template: "photos_html/delete")
     redirect_to("/photos")
   end
+
+  def create
+    image = params.fetch("input_image")
+    caption = params.fetch("input_caption")
+    owner_id = params.fetch("input_owner_id")
+    new_photo = Photo.new
+    new_photo.image = image
+    new_photo.caption = caption
+    new_photo.owner_id = owner_id
+    new_photo.save
+    # render(template: "photos_html/delete")
+    redirect_to("/photos")
+  end
+
+  def update
+    my_photo_id = params.fetch("photo_id")
+    caption = params.fetch("input_caption")
+    image = params.fetch("input_image")
+    the_photo = Photo.where(id: my_photo_id).first
+    the_photo.caption = caption
+    the_photo.image = image
+    the_photo.save
+    redirect_to("/photos/" + my_photo_id)
+  end
 end
