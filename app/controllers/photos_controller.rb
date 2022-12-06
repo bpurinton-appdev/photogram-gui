@@ -5,13 +5,21 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @my_photo_id = params.fetch("photo_id")
-    @the_photo = Photo.where(id: @my_photo_id).first
+    my_photo_id = params.fetch("photo_id")
+    @the_photo = Photo.where(id: my_photo_id).first
 
     if @the_photo == nil
       redirect_to("/404")
     else
       render(template: "photos_html/show")
     end
+  end
+
+  def delete
+    my_photo_id = params.fetch("photo_id")
+    the_photo = Photo.where(id: my_photo_id).first
+    the_photo.destroy
+    # render(template: "photos_html/delete")
+    redirect_to("/photos")
   end
 end
