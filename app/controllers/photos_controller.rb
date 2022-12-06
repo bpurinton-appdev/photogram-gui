@@ -33,7 +33,7 @@ class PhotosController < ApplicationController
     new_photo.owner_id = owner_id
     new_photo.save
     # render(template: "photos_html/delete")
-    redirect_to("/photos")
+    redirect_to("/photos/" + new_photo.id.to_s)
   end
 
   def update
